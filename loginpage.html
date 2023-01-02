@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+</head>
+<script>
+    //用户名和密码不能为空
+function checkform() {
+    $user_name = document.getElementById("username").value;
+    $user_pwd = document.getElementById("password").value;
+    if ($user_name == '') {
+        alert("用户名不能为空");
+        username.value = "";
+        return;
+        // window.history.go(-1);
+    }
+    if ($user_pwd == '') {
+        alert("密码不能为空");
+        password.value = "";
+        return;
+        // window.history.go(-1);
+    }
+}
+</script>
+<body>
+    <h1 align="center">欢迎您的访问！</h1>
+    <form method="POST" action="loginpage.php" align="center">
+        用户名：<input type="text" name="username" id="username" placeholder="请输入用户名"><br/>
+        密　码：<input type="password" name="password" id="password" placeholder="请输入密码"><br>
+        <input type="submit"value="登录" onclick="checkform()">
+        <p>
+    <a href="register.html"><input type="button" value='注册'></a>
+    <a href="admin.html"><input type="button" value='管理员登录'></a>
+    </form>
+</html>
