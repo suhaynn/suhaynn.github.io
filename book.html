@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书签管理页面</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui/dist/css/mdui.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar {
+            width: 200px;
+            border-right: 2px solid #ddd;
+            overflow-y: auto;
+            max-height: calc(100vh - 60px);
+        }
+        .category-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .category-nav li {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .category-nav li.active {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .main-content {
+            flex: 1;
+            padding-left: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 60px);
+        }
+        .bookmark-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+        }
+        .bookmark-list .mdui-card {
+            width: 100%;
+        }
+        .bookmark-list .mdui-card-primary-title {
+            display: flex;
+            align-items: center;
+        }
+        .bookmark-list .mdui-card-primary-title img {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+        }
+        .bookmark-list .mdui-card-primary-title span {
+            flex: 1;
+        }
+        .category-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 20px 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <ul class="category-nav" id="categoryNav">
+                <!-- 动态生成分类导航 -->
+            </ul>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-content" id="mainContent">
+            <!-- 动态生成书签卡片 -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mdui/dist/js/mdui.min.js"></script>
+    <script>
+        // 示例数据
+        const bookmarksData = {
+            categories: [
+                {
+                    name: " 空间测绘",
+                    entries: [
+                        { title: "FOFA", url: "https://fofa.info/", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "鹰图", url: "https://hunter.qianxin.com/", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "Quake", url: "https://quake.360.net/quake/#/index", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "零零信安", url: "https://0.zone", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "网站图标哈希生成器", url: "https://favicon-hash.kmsec.uk/", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" }
+                    ]
+                },
+                {
+                    name: "新闻",
+                    entries: [
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" }
+                    ]
+                },
+                {
+                    name: "新闻1",
+                    entries: [
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" }
+                    ]
+                },
+                {
+                    name: "新闻11",
+                    entries: [
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" }
+                    ]
+                },
+                {
+                    name: "新闻111",
+                    entries: [
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" }
+                    ]
+                },{
+                    name: "新闻2",
+                    entries: [
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" }
+                    ]
+                },
+                {
+                    name: "新闻3",
+                    entries: [
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" }
+                    ]
+                },
+                {
+                    name: "新闻4",
+                    entries: [
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" },
+                        { title: "CNN", url: "https://cnn.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "BBC", url: "https://bbc.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "新华网", url: "https://www.xinhuanet.com", iconUrl: "https://favicon.png.pub/v1/aHR0cHM6Ly93d3cueGluaHVhbmV0LmNvbS8=" },
+                        { title: "人民网", url: "https://www.people.com.cn", iconUrl: "https://www.people.com.cn/favicon.ico" },
+                        { title: "新浪新闻", url: "https://news.sina.com.cn", iconUrl: "https://news.sina.com.cn/favicon.ico" },
+                        { title: "腾讯新闻", url: "https://news.qq.com", iconUrl: "https://news.qq.com/favicon.ico" }
+                    ]
+                },
+            ]
+        };
+
+        const categoryNav = document.getElementById('categoryNav');
+        const mainContent = document.getElementById('mainContent');
+        let activeCategory = null;
+
+        // 生成分类导航
+        function generateCategoryNav() {
+            bookmarksData.categories.forEach(category => {
+                const li = document.createElement('li');
+                li.textContent = category.name;
+                li.addEventListener('click', () => scrollToCategory(category.name));
+                categoryNav.appendChild(li);
+            });
+        }
+
+        // 生成书签列表
+        function generateBookmarkList() {
+            bookmarksData.categories.forEach(category => {
+                const categoryTitle = document.createElement('div');
+                categoryTitle.className = 'category-title';
+                categoryTitle.id = `category-${category.name.replace(/\s+/g, '-').toLowerCase()}`;
+                categoryTitle.textContent = category.name;
+                mainContent.appendChild(categoryTitle);
+
+                const bookmarkList = document.createElement('div');
+                bookmarkList.className = 'bookmark-list';
+                category.entries.forEach(entry => {
+                    const card = document.createElement('div');
+                    card.className = 'mdui-card mdui-shadow-2';
+
+                    const cardPrimary = document.createElement('div');
+                    cardPrimary.className = 'mdui-card-primary';
+
+                    const cardTitle = document.createElement('div');
+                    cardTitle.className = 'mdui-card-primary-title';
+
+                    const icon = document.createElement('img');
+                    icon.src = entry.iconUrl;
+                    icon.alt = entry.title;
+
+                    const link = document.createElement('a');
+                    link.href = entry.url;
+                    link.target = '_blank';
+                    link.textContent = entry.title;
+
+                    cardTitle.appendChild(icon);
+                    cardTitle.appendChild(link);
+                    cardPrimary.appendChild(cardTitle);
+                    card.appendChild(cardPrimary);
+                    bookmarkList.appendChild(card);
+                });
+                mainContent.appendChild(bookmarkList);
+            });
+        }
+
+        // 滚动到指定分类
+        function scrollToCategory(categoryName) {
+            const activeLi = categoryNav.querySelector('.active');
+            if (activeLi) activeLi.classList.remove('active');
+            const newActiveLi = categoryNav.querySelector(`li:has([textContent="${categoryName}"])`);
+            if (newActiveLi) newActiveLi.classList.add('active');
+            activeCategory = categoryName;
+
+            const categoryTitle = document.getElementById(`category-${categoryName.replace(/\s+/g, '-').toLowerCase()}`);
+            if (categoryTitle) {
+                categoryTitle.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 初始化
+        generateCategoryNav();
+        generateBookmarkList();
+        scrollToCategory(bookmarksData.categories[0].name); // 默认显示第一个分类
+    </script>
+</body>
+</html>
