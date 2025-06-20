@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="整了一个博客记录一下过程，都是跟着网上的文章整的非原创。 下载安装基础运行程序Githttps:&#x2F;&#x2F;github.com&#x2F;git-for-windows&#x2F;git&#x2F;releases&#x2F;download&#x2F;v2.49.0.windows.1&#x2F;Git-2.49.0-64-bit.exe Node.js下载地址：https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; 12npm config set prefix &amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用github托管hexo博客">
+<meta property="og:url" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="suhaynn&#39; Blog">
+<meta property="og:description" content="整了一个博客记录一下过程，都是跟着网上的文章整的非原创。 下载安装基础运行程序Githttps:&#x2F;&#x2F;github.com&#x2F;git-for-windows&#x2F;git&#x2F;releases&#x2F;download&#x2F;v2.49.0.windows.1&#x2F;Git-2.49.0-64-bit.exe Node.js下载地址：https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; 12npm config set prefix &amp;q">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749791147839-dda0d4a7-a690-41d8-a4fd-8baab741ced4.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749791785310-b7c625f5-0618-49f0-b21c-099a9c3dbcbb.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749791794177-f3d361ab-08e9-485e-a29c-e80005a6280f.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792293563-c52911db-ca06-4f71-989b-16f17f64b10e.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792369789-e1589559-51f4-49e5-b769-30bb8075e40d.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792378382-25ebdbb9-38d3-4713-a12f-bfbf5135690f.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792391823-541a1a9b-88de-4dd3-890e-af28b87ea0de.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792693588-8e7ef94a-add2-42df-beea-7fd6e823e275.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792718473-120e0e1c-aea1-454a-8c56-eb7aa3955b41.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792880836-839665a1-85ef-4048-a80c-224567fa518a.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792925686-dadd27c4-0b49-4831-990a-900bffa6b509.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792946941-0d7332ad-53b5-477d-bf92-9236b4268b01.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792996614-eb3ce47d-fc67-4940-aa6e-b561cfe61cc2.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749793047147-133bc1da-4d38-495b-aa70-fb46cb49b696.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749793107513-58f4a7eb-939c-4c07-ae2c-a9c78905addc.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749792654806-410dc8fd-23d0-4e2e-96bd-c9436c8fe525.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749793180438-79bd55a4-cdfe-4152-b0de-009de798158e.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749793884201-5f856818-65ad-4a12-ad55-d67c206b4da7.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749793995626-9bcab6bf-ee9d-48a4-836b-9d1a759a70b3.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749794034011-98ee1ebc-7aaa-4f65-9ded-91a3604a8ab8.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749794047955-c703010b-4cf2-4d28-b279-80cb1067dc6a.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749794156277-fad8e5b8-9661-4352-8928-9c4311713236.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1750392996258-59a2b746-bcc3-424b-9e70-31f0040f2848.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749793350731-aa9dfbb2-bd3c-41b4-bc42-7174be572d66.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749794274163-9f909395-917c-4453-be5a-ef13d98e2e33.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749794298727-3480004b-60f7-4b39-9610-42701efa3734.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749794814405-e272d310-95b4-4c58-a153-e2612179ed5d.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749795208211-85b30a24-6a27-42fc-a145-e6974dacba0d.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749795495094-3b49005f-c228-4ce4-b2d2-1d0b981bf48a.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809031335-73e336e6-79e2-4bb9-ac0e-50410b0e9d9e.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809207538-e3e466d9-0033-4228-bf6d-615d6c898c9c.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809259870-a48e6c03-27a6-4db3-86f4-4e2f29c6a894.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809676625-88de9ed0-d850-479f-8df5-0c4a5b8f891a.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809327085-0e9fc9c1-6e44-403f-ad97-fd7d79c121e0.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809691989-568f2bbe-b69d-47be-b6c8-e1ae3d201f0d.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809427773-b4bf919f-9ae8-4ff7-902f-22e29e542a13.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809454264-b48fca2f-ecc9-49da-991d-b884cf222dc2.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809714055-2c8edc32-6655-4640-8d8f-a7667ff8c593.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809734248-86f4f6ef-5d5b-4cf8-99b0-86cffa843b34.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809755996-e4724a50-6c67-4c93-974f-2b6f8e7c8f55.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809765736-713c8eb2-1116-4876-9771-7f237bb49306.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809800020-efca5872-c35a-455e-8cdc-e18168992bc0.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809809665-59db3ed7-3396-42d2-b6d5-1d127cf4943d.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809828342-53abe348-db95-4278-8fd7-d99790aed483.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809831843-2b6db625-bb31-451c-964d-e3af11766b81.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809835902-ef72ff0a-1b9c-45cc-89ed-a37db941ebf1.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809842364-9bf4b108-a4a9-4b90-a76c-02c21ffb5a53.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809846295-01127a53-2815-4836-8f0d-eeb252686bf5.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809856190-660693e5-ee98-4162-b2ba-b0d2780f93ab.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809868654-f6edc3a6-7af0-4022-8070-141da85f91c2.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809876111-0e8f8186-1e4f-4001-8fb4-57146c05a922.png">
+<meta property="og:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749809882065-969c8158-e417-4fb2-b0ef-ee31f91b608f.png">
+<meta property="article:published_time" content="2025-06-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-20T04:29:49.811Z">
+<meta property="article:author" content="suhaynn">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/1749791147839-dda0d4a7-a690-41d8-a4fd-8baab741ced4.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../../../images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../../../images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>使用github托管hexo博客</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="../../../../css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="../../../../index.html">首页</a></li><!--
+     --><!--
+       --><li><a href="../../../../about/">关于</a></li><!--
+     --><!--
+       --><li><a href="../../../../archives/">归档</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="../../17/%E8%AF%AD%E9%9B%80%E7%9F%A5%E8%AF%86%E5%BA%93%E8%BD%AChexo%E5%8D%9A%E5%AE%A2/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&text=使用github托管hexo博客"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&is_video=false&description=使用github托管hexo博客"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用github托管hexo博客&body=Check out this article: http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&name=使用github托管hexo博客&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&t=使用github托管hexo博客"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">下载安装基础运行程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git"><span class="toc-number">1.1.</span> <span class="toc-text">Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js"><span class="toc-number">1.2.</span> <span class="toc-text">Node.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-hexo-%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">安装 hexo 程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-hexo-%E7%A8%8B%E5%BA%8F-1"><span class="toc-number">2.1.</span> <span class="toc-text">安装 hexo 程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-hexo-%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">2.2.</span> <span class="toc-text">创建 hexo 文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98"><span class="toc-number">2.3.</span> <span class="toc-text">安装主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="toc-number">2.4.</span> <span class="toc-text">修改配置信息：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2-hexo"><span class="toc-number">2.5.</span> <span class="toc-text">部署 hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-hexo-%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%A2%84%E8%A7%88"><span class="toc-number">2.6.</span> <span class="toc-text">启动 hexo 本地化预览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0%E7%BD%91%E7%AB%99%E5%9C%B0%E5%9D%80%EF%BC%9A"><span class="toc-number">2.7.</span> <span class="toc-text">访问本地网站地址：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E8%BF%9E%E6%8E%A5-GitHub"><span class="toc-number">3.</span> <span class="toc-text">本地连接 GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8E%E9%82%AE%E7%AE%B1"><span class="toc-number">3.1.</span> <span class="toc-text">配置用户名与邮箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-SSH-%E5%AF%86%E5%8C%99"><span class="toc-number">3.2.</span> <span class="toc-text">创建 SSH 密匙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-GitHub-%E4%B8%AD%E6%B7%BB%E5%8A%A0-SSH-%E5%AF%86%E9%92%A5"><span class="toc-number">3.3.</span> <span class="toc-text">在 GitHub 中添加 SSH 密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.4.</span> <span class="toc-text">验证连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-GitHub-%E4%BB%93%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">创建 GitHub 仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0-hexo-%E7%A8%8B%E5%BA%8F%E5%88%B0-GitHub"><span class="toc-number">5.</span> <span class="toc-text">上传 hexo 程序到 GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85hexo-deployer-git"><span class="toc-number">5.1.</span> <span class="toc-text">安装hexo-deployer-git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-config-yml-%E6%96%87%E4%BB%B6"><span class="toc-number">5.2.</span> <span class="toc-text">修改_config.yml 文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85cactus%E4%B8%BB%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">安装cactus主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E6%A0%8F%E7%9B%B8%E5%85%B3"><span class="toc-number">6.1.</span> <span class="toc-text">导航栏相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%AF%BC%E8%88%AA%E6%A0%8F%E6%B7%BB%E5%8A%A0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD"><span class="toc-number">6.2.</span> <span class="toc-text">在导航栏添加搜索功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD"><span class="toc-number">6.3.</span> <span class="toc-text">开启评论功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%B6%E4%BB%96%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0%E9%93%BE%E6%8E%A5"><span class="toc-number">6.4.</span> <span class="toc-text">添加其他社交平台链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-number">6.5.</span> <span class="toc-text">增加数据分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E4%BD%93-%E9%A2%9C%E8%89%B2%E5%92%8C%E7%BD%91%E7%AB%99logo-icon"><span class="toc-number">6.6.</span> <span class="toc-text">自定义字体&#x2F;颜色和网站logo&#x2F;icon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E7%AB%99logo-icon"><span class="toc-number">6.7.</span> <span class="toc-text">自定义网站logo&#x2F;icon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%82%B9%E5%87%BB%E9%87%8F%E5%8A%9F%E8%83%BD"><span class="toc-number">6.8.</span> <span class="toc-text">添加点击量功能</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        使用github托管hexo博客
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">suhaynn</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-15T16:00:00.000Z" class="dt-published" itemprop="datePublished">2025-06-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="../../../../categories/%E5%8D%9A%E5%AE%A2/">博客</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="../../../../tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>整了一个博客记录一下过程，都是跟着网上的文章整的非原创。</p>
+<h2 id="下载安装基础运行程序"><a href="#下载安装基础运行程序" class="headerlink" title="下载安装基础运行程序"></a><strong>下载安装基础运行程序</strong></h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p><a target="_blank" rel="noopener" href="https://github.com/git-for-windows/git/releases/download/v2.49.0.windows.1/Git-2.49.0-64-bit.exe">https://github.com/git-for-windows/git/releases/download/v2.49.0.windows.1/Git-2.49.0-64-bit.exe</a></p>
+<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>下载地址：<a href="https://sspai.com/link?target=https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set prefix &quot;C:\Program Files\nodejs\node_global&quot;</span><br><span class="line">npm config set cache &quot;C:\Program Files\nodejs\node_cache&quot;</span><br></pre></td></tr></table></figure>
+
+<p>看不懂的话就去单独搜如何安装Node.js</p>
+<p><img src="1749791147839-dda0d4a7-a690-41d8-a4fd-8baab741ced4.png"></p>
+<h2 id="安装-hexo-程序"><a href="#安装-hexo-程序" class="headerlink" title="安装 hexo 程序"></a><strong>安装 hexo 程序</strong></h2><h3 id="安装-hexo-程序-1"><a href="#安装-hexo-程序-1" class="headerlink" title="安装 hexo 程序"></a><strong>安装 hexo 程序</strong></h3><p>运行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749791785310-b7c625f5-0618-49f0-b21c-099a9c3dbcbb.png"></p>
+<p>查看版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo v</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749791794177-f3d361ab-08e9-485e-a29c-e80005a6280f.png"></p>
+<p>如显示多行版本信息如 hexo: 5.1.1等，安装成功。</p>
+<h3 id="创建-hexo-文件夹"><a href="#创建-hexo-文件夹" class="headerlink" title="创建 hexo 文件夹"></a><strong>创建 hexo 文件夹</strong></h3><p>hexo 文件夹，是未来博客运转的目标文件夹，写文、主题安装等等都在这里完成。</p>
+<p>请在指定路径新建文件夹（英文名），右键空白处，选择 Git Bash here，输入指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749792293563-c52911db-ca06-4f71-989b-16f17f64b10e.png"></p>
+<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a><strong>安装主题</strong></h3><p>现在这个是必须过程了，反正自带的主题也没人用不是么？</p>
+<p>6.1 在 theme 文件夹下，建立你要使用的主题的同名文件夹，比如 theme&#x2F;next</p>
+<p>6.2 cd 到 theme 文件夹，或者直接在 theme 文件夹里右键运行 Git Bash。</p>
+<p>6.3 输入获取主题的命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next next</span><br></pre></td></tr></table></figure>
+
+<p>速度不会太快，等待安装进度结束。</p>
+<h3 id="修改配置信息："><a href="#修改配置信息：" class="headerlink" title="修改配置信息："></a><strong>修改配置信息：</strong></h3><p>打开安装文件夹下_config.yml 文件，修改 theme 后面的名字为你刚才安装的主题，比如 next。</p>
+<h3 id="部署-hexo"><a href="#部署-hexo" class="headerlink" title="部署 hexo"></a><strong>部署 hexo</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749792369789-e1589559-51f4-49e5-b769-30bb8075e40d.png"></p>
+<h3 id="启动-hexo-本地化预览"><a href="#启动-hexo-本地化预览" class="headerlink" title="启动 hexo 本地化预览"></a><strong>启动 hexo 本地化预览</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749792378382-25ebdbb9-38d3-4713-a12f-bfbf5135690f.png"></p>
+<h3 id="访问本地网站地址："><a href="#访问本地网站地址：" class="headerlink" title="访问本地网站地址："></a><strong>访问本地网站地址：</strong></h3><p><a href="https://sspai.com/link?target=http://localhost:4000/">http://localhost:4000</a></p>
+<p><img src="1749792391823-541a1a9b-88de-4dd3-890e-af28b87ea0de.png"></p>
+<h2 id="本地连接-GitHub"><a href="#本地连接-GitHub" class="headerlink" title="本地连接 GitHub"></a>本地连接 GitHub</h2><h3 id="配置用户名与邮箱"><a href="#配置用户名与邮箱" class="headerlink" title="配置用户名与邮箱"></a>配置用户名与邮箱</h3><p>在某一个盘里面创建一个文件夹，名字随意，然后右键选择 Open Git Bash Here：</p>
+<p><img src="1749792693588-8e7ef94a-add2-42df-beea-7fd6e823e275.png"></p>
+<p>不出意外的话应该会弹出一个命令行界面</p>
+<p><img src="1749792718473-120e0e1c-aea1-454a-8c56-eb7aa3955b41.png"></p>
+<p>我们在里面输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;你的 GitHub 用户名&quot;</span><br><span class="line">git config --global user.email &quot;你的 GitHub 邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749792880836-839665a1-85ef-4048-a80c-224567fa518a.png"></p>
+<h3 id="创建-SSH-密匙"><a href="#创建-SSH-密匙" class="headerlink" title="创建 SSH 密匙"></a><strong>创建 SSH 密匙</strong></h3><p>我们在命令行窗口中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;你的 GitHub 邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p>什么都不用管，一路回车就行。</p>
+<p><img src="1749792925686-dadd27c4-0b49-4831-990a-900bffa6b509.png"></p>
+<p>然后我们进入 <code>C:\Users\ 用户名 \.ssh</code> 目录（勾选显示 “隐藏的项目”）</p>
+<p><img src="1749792946941-0d7332ad-53b5-477d-bf92-9236b4268b01.png"></p>
+<p>我们<strong>用记事本</strong>打开<code>id_rsa.pub</code>并<strong>复制里面的内容</strong>。</p>
+<h3 id="在-GitHub-中添加-SSH-密钥"><a href="#在-GitHub-中添加-SSH-密钥" class="headerlink" title="在 GitHub 中添加 SSH 密钥"></a>在 GitHub 中添加 SSH 密钥</h3><p>这个时候我们回到 GitHub，进入 <strong>Settings</strong>：</p>
+<p><img src="1749792996614-eb3ce47d-fc67-4940-aa6e-b561cfe61cc2.png"></p>
+<p>选择左边栏的 SSH and GPG keys，点击 New SSH key：</p>
+<p><img src="1749793047147-133bc1da-4d38-495b-aa70-fb46cb49b696.png"></p>
+<p>Title 随便取，然后把 id_rsa.pub 里面的内容到复制到 Key 中，点击 Add SSH key：</p>
+<p><img src="1749793107513-58f4a7eb-939c-4c07-ae2c-a9c78905addc.png"></p>
+<p>保存完毕以后，我们可以在本地验证一下连接。</p>
+<h3 id="验证连接"><a href="#验证连接" class="headerlink" title="验证连接"></a>验证连接</h3><p>依旧在 Git Bash Here 界面中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>出现 “Are you sure……”，输入 yes 回车确认。</p>
+<p><img src="1749792654806-410dc8fd-23d0-4e2e-96bd-c9436c8fe525.png"></p>
+<p>若出现下图的提示即连接成功：</p>
+<p><img src="1749793180438-79bd55a4-cdfe-4152-b0de-009de798158e.png"></p>
+<h2 id="创建-GitHub-仓库"><a href="#创建-GitHub-仓库" class="headerlink" title="创建 GitHub 仓库"></a>创建 GitHub 仓库</h2><p>我们在自己 GitHub 的主页 repository 中点击右上角的 New：</p>
+<p><img src="1749793884201-5f856818-65ad-4a12-ad55-d67c206b4da7.png"></p>
+<p>填写基本信息</p>
+<ul>
+<li>Repository name 中输入<code>用户名.github.io</code>，一定要是这个名字！</li>
+<li>勾选 Add a README file</li>
+</ul>
+<p><img src="1749793995626-9bcab6bf-ee9d-48a4-836b-9d1a759a70b3.png"></p>
+<p>填好后点击 Create repository 创建仓库。</p>
+<p><img src="1749794034011-98ee1ebc-7aaa-4f65-9ded-91a3604a8ab8.png"></p>
+<p>现在我们访问 <code>https://用户名.github.io</code>（夜梦的就是 yemenghexo.github.io）可以看到默认界面：</p>
+<p><img src="1749794047955-c703010b-4cf2-4d28-b279-80cb1067dc6a.png"></p>
+<h2 id="上传-hexo-程序到-GitHub"><a href="#上传-hexo-程序到-GitHub" class="headerlink" title="上传 hexo 程序到 GitHub"></a>上传 hexo 程序到 GitHub</h2><h3 id="安装hexo-deployer-git"><a href="#安装hexo-deployer-git" class="headerlink" title="安装hexo-deployer-git"></a>安装<strong>hexo-deployer-git</strong></h3><p>我们需要先安装 <strong>hexo-deployer-git</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749794156277-fad8e5b8-9661-4352-8928-9c4311713236.png"></p>
+<h3 id="修改-config-yml-文件"><a href="#修改-config-yml-文件" class="headerlink" title="修改_config.yml 文件"></a>修改_config.yml 文件</h3><p>然后修改_config.yml 文件末尾的 Deployment 部分：</p>
+<p><img src="1750392996258-59a2b746-bcc3-424b-9e70-31f0040f2848.png"></p>
+<p><img src="1749793350731-aa9dfbb2-bd3c-41b4-bc42-7174be572d66.png"></p>
+<p>修改成如下（修改为你的用户名与仓库名）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:suhaynn/suhaynn.github.io.git</span><br><span class="line">  branch: gh-pages</span><br></pre></td></tr></table></figure>
+
+<p>其实就是通过 SSH 进行连接，SSH 连接地址可以 直接在仓库 <code>Code</code> 里面看到：</p>
+<p><img src="1749794274163-9f909395-917c-4453-be5a-ef13d98e2e33.png"></p>
+<p><img src="1749794298727-3480004b-60f7-4b39-9610-42701efa3734.png"></p>
+<p>修改完成保存后运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo c</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>出现下面的提示说明已经把网站上传到 GitHub 了：</p>
+<p><img src="1749794814405-e272d310-95b4-4c58-a153-e2612179ed5d.png"></p>
+<p>然后我们需要在库设置（Repository Settings）中将默认分支设置为<code>_config.yml</code> 配置中的分支名称。</p>
+<p>在 pages 页面调整源分支：</p>
+<p><img src="1749795208211-85b30a24-6a27-42fc-a145-e6974dacba0d.png"></p>
+<p>不出意外的话是不会出意外的，<strong>稍等片刻</strong>我们访问<code>用户名.github.io</code></p>
+<p><img src="1749795495094-3b49005f-c228-4ce4-b2d2-1d0b981bf48a.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp; hexo g &amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装cactus主题"><a href="#安装cactus主题" class="headerlink" title="安装cactus主题"></a><font style="color:rgb(79, 79, 79);">安装cactus主题</font></h2><p>进入hexo所在的文件夹（我是cd E:\blog\suhaynn）</p>
+<p>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/probberechts/hexo-theme-cactus.git themes/cactus</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749809031335-73e336e6-79e2-4bb9-ac0e-50410b0e9d9e.png"></p>
+<p>如果timeout就用ssh连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cline git@github.com:probberechts/hexo-theme-cactus.git themes/cactus</span><br></pre></td></tr></table></figure>
+
+<p>然后在.&#x2F;_config.yml中修改theme</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># theme: landscape</span><br><span class="line">theme: cactus</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749809207538-e3e466d9-0033-4228-bf6d-615d6c898c9c.png"></p>
+<p>切换主题的风格</p>
+<p>前面提到了cactus主题有四个风格，切换风格只需要进入.&#x2F;themes&#x2F;cactus&#x2F;_config.yml中找到colorscheme修改就完事，注意每次修改完都需要hexo clean hexo g才会生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Set the color scheme.</span><br><span class="line"># Available color schemes are &#x27;dark&#x27;, &#x27;light&#x27;, &#x27;classic&#x27; and &#x27;white&#x27;.</span><br><span class="line"># Alternatively, add your own custom color scheme to source/css/_colors.</span><br><span class="line">colorscheme: dark</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749809259870-a48e6c03-27a6-4db3-86f4-4e2f29c6a894.png"></p>
+<h3 id="导航栏相关"><a href="#导航栏相关" class="headerlink" title="导航栏相关"></a>导航栏相关</h3><p>新建一个导航栏的项</p>
+<p><img src="1749809676625-88de9ed0-d850-479f-8df5-0c4a5b8f891a.png"></p>
+<p>在.&#x2F;themes&#x2F;cactus&#x2F;_config.yml找到nav</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nav:</span><br><span class="line">  home: /</span><br><span class="line">  about: /about/</span><br><span class="line">  articles: /archives/</span><br><span class="line">  projects: http://github.com/probberechts</span><br><span class="line">  LINK_NAME: URL</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749809327085-0e9fc9c1-6e44-403f-ad97-fd7d79c121e0.png"></p>
+<p> 直接在nav下面添加就行，添加完这一项之后可以让它指向一个链接（例如projcets），也可以让它指向站内的一个页面。新建一个页面执行hexo new page xxx，然后这个页面的路径就是&#x2F;xxx&#x2F;</p>
+<p>更新后会在.&#x2F;themes&#x2F;cactus&#x2F;source中发现一个和page名称一样的文件夹</p>
+<p>让导航栏中的某一项显示内容在首页</p>
+<p><img src="1749809691989-568f2bbe-b69d-47be-b6c8-e1ae3d201f0d.png"></p>
+<p>以project为例，只需在.&#x2F;themes&#x2F;cactus&#x2F;source中创建&#x2F;_data&#x2F;projects.json，然后修改json文件为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">       &quot;name&quot;:&quot;Hexo&quot;,</span><br><span class="line">       &quot;url&quot;:&quot;https://hexo.io/&quot;,</span><br><span class="line">       &quot;desc&quot;:&quot;A fast, simple &amp; powerful blog framework&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">       &quot;name&quot;:&quot;Font Awesome&quot;,</span><br><span class="line">       &quot;url&quot;:&quot;http://fontawesome.io/&quot;,</span><br><span class="line">       &quot;desc&quot;:&quot;The iconic font and CSS toolkit&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="在导航栏添加搜索功能"><a href="#在导航栏添加搜索功能" class="headerlink" title="在导航栏添加搜索功能"></a>在导航栏添加搜索功能</h3><p>在.&#x2F;themes&#x2F;cactus&#x2F;_config.yml中找到nav 新建search标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nav:</span><br><span class="line">  search: /search/</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749809427773-b4bf919f-9ae8-4ff7-902f-22e29e542a13.png"></p>
+<p>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-search --save</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749809454264-b48fca2f-ecc9-49da-991d-b884cf222dc2.png"></p>
+<p>执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page search</span><br></pre></td></tr></table></figure>
+
+<p>进入.&#x2F;themes&#x2F;cactus&#x2F;source&#x2F;serch&#x2F;index.md，修改md文件的头为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: Search</span><br><span class="line">type: search</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>更新之后进入网站，点击search就可以搜索了</p>
+<p><img src="1749809714055-2c8edc32-6655-4640-8d8f-a7667ff8c593.png"></p>
+<p>新增标签功能</p>
+<p>只需要在每篇文章的头部添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">title: Tags and Categories</span><br><span class="line">date: 2017-12-24 23:29:53</span><br><span class="line">tags:</span><br><span class="line">- Foo</span><br><span class="line">- Bar</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> 就可以在首页看到</p>
+<p><img src="1749809734248-86f4f6ef-5d5b-4cf8-99b0-86cffa843b34.png"></p>
+<p>每篇文章可以有两个tag，tag的顺序影响其重要程度</p>
+<h3 id="开启评论功能"><a href="#开启评论功能" class="headerlink" title="开启评论功能"></a>开启评论功能</h3><p>cactus支持Disqus和Utterances两个平台的评论功能，只需要在.&#x2F;themes&#x2F;cactus&#x2F;_config.yml分别找到它们就行。</p>
+<p>以Disqus为例，把enable设置为true，然后再去Disqus官网注册个账号,认证邮箱后在shortname处填上自己的昵称就行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">disqus:</span><br><span class="line">  enabled: true</span><br><span class="line">  shortname: SITENAME</span><br></pre></td></tr></table></figure>
+
+<p><img src="1749809755996-e4724a50-6c67-4c93-974f-2b6f8e7c8f55.png"></p>
+<p>之后就能愉快的评论了，不过Disqus现在好像必须要梯子才能正常使用。</p>
+<p><img src="1749809765736-713c8eb2-1116-4876-9771-7f237bb49306.png"></p>
+<h3 id="添加其他社交平台链接"><a href="#添加其他社交平台链接" class="headerlink" title="添加其他社交平台链接"></a>添加其他社交平台链接</h3><p><img src="1749809800020-efca5872-c35a-455e-8cdc-e18168992bc0.png"></p>
+<p>在.&#x2F;themes&#x2F;cactus&#x2F;_config.yml搜索Social media links</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">social_links:</span><br><span class="line">  github: your-github-url</span><br><span class="line">  twitter: your-twitter-url</span><br><span class="line">  NAME: your-NAME-url</span><br></pre></td></tr></table></figure>
+
+<p>然后前面就是社交平台的名称，后面就是你该社交平台的url，注意这里只能选Font awesome上有的icon，才会显示对应的icon，进入网站搜索社交平台的英文名就能看到是否有这个icon了，这里列出几个比较常见的：weibo weixin zhihu rss。</p>
+<p><img src="1749809809665-59db3ed7-3396-42d2-b6d5-1d127cf4943d.png"></p>
+<h3 id="增加数据分析"><a href="#增加数据分析" class="headerlink" title="增加数据分析"></a>增加数据分析</h3><p>在.&#x2F;themes&#x2F;cactus&#x2F;_config.yml中，搜索analytics，cactus支持以下几种数据分析功能，说白了就是后台管理。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">google_analytics:</span><br><span class="line">  enabled: true</span><br><span class="line">  id: &#x27;UA-49627206-1&#x27;</span><br><span class="line"></span><br><span class="line">baidu_analytics:</span><br><span class="line">  enabled: true</span><br><span class="line">  id: 2e6da3c375c8a87f5b664cea6d4cb29c</span><br><span class="line"></span><br><span class="line">cloudflare_analytics:</span><br><span class="line">  enabled: true</span><br><span class="line">  id: 0dabb6e21848405483a237e6a7b6ed04</span><br><span class="line"></span><br><span class="line">umami_analytics:</span><br><span class="line">  enabled: false</span><br><span class="line">  id: e77e68be-f6e4-4br3-9365-2b76b57cd571</span><br><span class="line">  host: https://analytics.domain.com</span><br></pre></td></tr></table></figure>
+
+<p>以百度分析为统计，先去百度统计官网注册一个账号，然后在网站列表点击新增网站</p>
+<p><img src="1749809828342-53abe348-db95-4278-8fd7-d99790aed483.png"></p>
+<p>填写相关信息</p>
+<p><img src="1749809831843-2b6db625-bb31-451c-964d-e3af11766b81.png"></p>
+<p>然后在代码管理-&gt;代码获取页面复制这一段，这就是你的tracking_id</p>
+<p><img src="1749809835902-ef72ff0a-1b9c-45cc-89ed-a37db941ebf1.png"></p>
+<p>然后回到.&#x2F;themes&#x2F;cactus&#x2F;_config.yml，修改这里的id，enabled设置为true</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">baidu_analytics:</span><br><span class="line">  enabled: true</span><br><span class="line">  id: 2e6da3c375c8a87f5b664cea6d4cb29c</span><br></pre></td></tr></table></figure>
+
+<p>进入百度统计的代码管理-&gt;代码安装检查，点击开始检查，如果显示代码安装正确，过一会就能显示你网站统计的数据了。</p>
+<p><img src="1749809842364-9bf4b108-a4a9-4b90-a76c-02c21ffb5a53.png"></p>
+<p><img src="1749809846295-01127a53-2815-4836-8f0d-eeb252686bf5.png"></p>
+<h3 id="自定义字体-颜色和网站logo-icon"><a href="#自定义字体-颜色和网站logo-icon" class="headerlink" title="自定义字体&#x2F;颜色和网站logo&#x2F;icon"></a>自定义字体&#x2F;颜色和网站logo&#x2F;icon</h3><p>自定义颜色</p>
+<p>进入.&#x2F;themes&#x2F;cactus&#x2F;source&#x2F;css&#x2F;colors中有四个文件，对应不同风格的样式</p>
+<p><img src="1749809856190-660693e5-ee98-4162-b2ba-b0d2780f93ab.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$color-background = #1d1f21</span><br><span class="line">$color-footer-mobile-1 = lighten($color-background, 2%)</span><br><span class="line">$color-footer-mobile-2 = lighten($color-background, 10%)</span><br><span class="line">$color-background-code = lighten($color-background, 2%)</span><br><span class="line">$color-border = #908d8d</span><br><span class="line">$color-meta = #908d8d</span><br><span class="line">$color-meta-code = #908d8d</span><br><span class="line">$color-link = rgba(212, 128, 170, 1)</span><br><span class="line">$color-text = #c9cacc      //正文</span><br><span class="line">$color-accent-3 = #cccccc  //副副标题</span><br><span class="line">$color-accent-2 = #eeeeee  //副标题</span><br><span class="line">$color-accent-1 = #ff6a00  //主标题</span><br><span class="line">$color-quote = #ccffb6</span><br><span class="line">$highlight = hexo-config(&quot;highlight&quot;) || &quot;rainbow&quot;</span><br></pre></td></tr></table></figure>
+
+<p>别的参数我没有调过，大家可以自己修改试一试</p>
+<p>自定义字体</p>
+<p>进入.&#x2F;themes&#x2F;cactus&#x2F;source&#x2F;css&#x2F;_variables.styl，就可以修改字体了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Fonts</span><br><span class="line">$font-family-body = &quot;Menlo&quot;, &quot;Meslo LG&quot;, monospace</span><br><span class="line">$font-family-mono = &quot;Menlo&quot;, &quot;Meslo LG&quot;, monospace</span><br><span class="line">$font-size = 14px</span><br><span class="line">$line-height = 1.725</span><br><span class="line">$page-width = 0rem + (hexo-config(&quot;page_width&quot;) || 39)</span><br><span class="line">// Logo</span><br><span class="line">$logo-width = 0px + (hexo-config(&quot;logo.width&quot;) || 0)</span><br><span class="line">$logo-height = 0px + (hexo-config(&quot;logo.height&quot;) || 0)</span><br><span class="line">$logo-grayout = hexo-config(&quot;logo.grayout&quot;) || false</span><br><span class="line">// Colors</span><br><span class="line">$colors = hexo-config(&quot;colorscheme&quot;) || &quot;dark&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>可用的字体在.&#x2F;themes&#x2F;cactus&#x2F;source&#x2F;lib&#x2F;中，cactus自带的只有meslo-LG vazir-font两种，有需要可以自己下载。</p>
+<h3 id="自定义网站logo-icon"><a href="#自定义网站logo-icon" class="headerlink" title="自定义网站logo&#x2F;icon"></a>自定义网站logo&#x2F;icon</h3><p>在.&#x2F;themes&#x2F;cactus&#x2F;source&#x2F;images&#x2F;下有四张图片</p>
+<p><img src="1749809868654-f6edc3a6-7af0-4022-8070-141da85f91c2.png"></p>
+<p>apple-touch-icon是苹果产品将网站的快捷方式添加到主屏幕所显示的logo</p>
+<p><img src="1749809876111-0e8f8186-1e4f-4001-8fb4-57146c05a922.png"></p>
+<p>logo就是显示在你网页上的那个东西，设计logo的网站，里面有很多半成品，拿来就能用。</p>
+<p>favicon-192x192就是192x192像素的logo.png，网上随便找个软件就能压缩</p>
+<p>favicon.ico有点难搞，因为它一个文件里面有不同规格的ico，我是用了一个叫氢贝的软件弄的，里面可以直接将各种图片格式转化为多规格的ico，非常方便。</p>
+<p><img src="1749809882065-969c8158-e417-4fb2-b0ef-ee31f91b608f.png"></p>
+<h3 id="添加点击量功能"><a href="#添加点击量功能" class="headerlink" title="添加点击量功能"></a>添加点击量功能</h3><p>进入.&#x2F;themes&#x2F;cactus&#x2F;_config.yml添加下面一段代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 是否开启访问量统计功能(不蒜子)</span><br><span class="line">busuanzi:</span><br><span class="line"> enable: true</span><br></pre></td></tr></table></figure>
+
+<p>进入.&#x2F;themes&#x2F;cactus&#x2F;layout&#x2F;_partial&#x2F;footer.ejs将其全部修改覆盖为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;footer id=&quot;footer&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;footer-left&quot;&gt;</span><br><span class="line">        &lt;%= __(&#x27;footer.copyright&#x27;) %&gt; &amp;copy;</span><br><span class="line">        &lt;% var endYear = (theme.copyright &amp;&amp; theme.copyright.end_year) ? theme.copyright.end_year : new Date().getFullYear() %&gt;</span><br><span class="line">        &lt;% var startYear = (theme.copyright &amp;&amp; theme.copyright.start_year) ? theme.copyright.start_year : new Date().getFullYear() %&gt;</span><br><span class="line">        &lt;%= startYear &gt;= endYear ? endYear : startYear + &quot;-&quot; + endYear %&gt;</span><br><span class="line">        &lt;%= config.author || config.title %&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div class=&quot;footer-right&quot;&gt;</span><br><span class="line">        &lt;nav&gt;</span><br><span class="line">          &lt;ul&gt;</span><br><span class="line">            &lt;% for (var i in theme.nav) &#123; %&gt;&lt;!--</span><br><span class="line">          --&gt;&lt;li&gt;&lt;a href=&quot;&lt;%- url_for(theme.nav[i]) %&gt;&quot;&gt;&lt;%= __(&#x27;nav.&#x27;+i).replace(&quot;nav.&quot;, &quot;&quot;) %&gt;&lt;/a&gt;&lt;/li&gt;&lt;!--</span><br><span class="line">        --&gt;&lt;% &#125; %&gt;</span><br><span class="line">          &lt;/ul&gt;</span><br><span class="line">          &lt;ul&gt;</span><br><span class="line">            &lt;% if (theme.busuanzi &amp;&amp; theme.busuanzi.enable)&#123; %&gt;</span><br><span class="line">              &lt;!-- 不蒜子统计 --&gt;</span><br><span class="line">              &lt;span id=&quot;busuanzi_container_site_pv&quot;&gt;</span><br><span class="line">                  本站总访问量&lt;span id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;次</span><br><span class="line">              &lt;/span&gt;</span><br><span class="line">              &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">              &lt;span id=&quot;busuanzi_container_site_uv&quot; style=&#x27;display:none&#x27;&gt;</span><br><span class="line">                      本站访客数&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;人</span><br><span class="line">              &lt;/span&gt;</span><br><span class="line">            &lt;script async src=&quot;//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">            &lt;% &#125; %&gt;</span><br><span class="line">          &lt;/ul&gt;</span><br><span class="line">        &lt;/nav&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      </span><br><span class="line">&lt;/footer&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="../../../../index.html">首页</a></li>
+        
+          <li><a href="../../../../about/">关于</a></li>
+        
+          <li><a href="../../../../archives/">归档</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%9F%BA%E7%A1%80%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.</span> <span class="toc-text">下载安装基础运行程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git"><span class="toc-number">1.1.</span> <span class="toc-text">Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js"><span class="toc-number">1.2.</span> <span class="toc-text">Node.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-hexo-%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.</span> <span class="toc-text">安装 hexo 程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-hexo-%E7%A8%8B%E5%BA%8F-1"><span class="toc-number">2.1.</span> <span class="toc-text">安装 hexo 程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-hexo-%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">2.2.</span> <span class="toc-text">创建 hexo 文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98"><span class="toc-number">2.3.</span> <span class="toc-text">安装主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="toc-number">2.4.</span> <span class="toc-text">修改配置信息：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2-hexo"><span class="toc-number">2.5.</span> <span class="toc-text">部署 hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-hexo-%E6%9C%AC%E5%9C%B0%E5%8C%96%E9%A2%84%E8%A7%88"><span class="toc-number">2.6.</span> <span class="toc-text">启动 hexo 本地化预览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0%E7%BD%91%E7%AB%99%E5%9C%B0%E5%9D%80%EF%BC%9A"><span class="toc-number">2.7.</span> <span class="toc-text">访问本地网站地址：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E8%BF%9E%E6%8E%A5-GitHub"><span class="toc-number">3.</span> <span class="toc-text">本地连接 GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8E%E9%82%AE%E7%AE%B1"><span class="toc-number">3.1.</span> <span class="toc-text">配置用户名与邮箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-SSH-%E5%AF%86%E5%8C%99"><span class="toc-number">3.2.</span> <span class="toc-text">创建 SSH 密匙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8-GitHub-%E4%B8%AD%E6%B7%BB%E5%8A%A0-SSH-%E5%AF%86%E9%92%A5"><span class="toc-number">3.3.</span> <span class="toc-text">在 GitHub 中添加 SSH 密钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E8%BF%9E%E6%8E%A5"><span class="toc-number">3.4.</span> <span class="toc-text">验证连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-GitHub-%E4%BB%93%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">创建 GitHub 仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0-hexo-%E7%A8%8B%E5%BA%8F%E5%88%B0-GitHub"><span class="toc-number">5.</span> <span class="toc-text">上传 hexo 程序到 GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85hexo-deployer-git"><span class="toc-number">5.1.</span> <span class="toc-text">安装hexo-deployer-git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-config-yml-%E6%96%87%E4%BB%B6"><span class="toc-number">5.2.</span> <span class="toc-text">修改_config.yml 文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85cactus%E4%B8%BB%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">安装cactus主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E6%A0%8F%E7%9B%B8%E5%85%B3"><span class="toc-number">6.1.</span> <span class="toc-text">导航栏相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%AF%BC%E8%88%AA%E6%A0%8F%E6%B7%BB%E5%8A%A0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD"><span class="toc-number">6.2.</span> <span class="toc-text">在导航栏添加搜索功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD"><span class="toc-number">6.3.</span> <span class="toc-text">开启评论功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%B6%E4%BB%96%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0%E9%93%BE%E6%8E%A5"><span class="toc-number">6.4.</span> <span class="toc-text">添加其他社交平台链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="toc-number">6.5.</span> <span class="toc-text">增加数据分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E4%BD%93-%E9%A2%9C%E8%89%B2%E5%92%8C%E7%BD%91%E7%AB%99logo-icon"><span class="toc-number">6.6.</span> <span class="toc-text">自定义字体&#x2F;颜色和网站logo&#x2F;icon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E7%AB%99logo-icon"><span class="toc-number">6.7.</span> <span class="toc-text">自定义网站logo&#x2F;icon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%82%B9%E5%87%BB%E9%87%8F%E5%8A%9F%E8%83%BD"><span class="toc-number">6.8.</span> <span class="toc-text">添加点击量功能</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&text=使用github托管hexo博客"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&is_video=false&description=使用github托管hexo博客"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用github托管hexo博客&body=Check out this article: http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&title=使用github托管hexo博客"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&name=使用github托管hexo博客&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/06/16/%E4%BD%BF%E7%94%A8github%E6%89%98%E7%AE%A1hexo%E5%8D%9A%E5%AE%A2/&t=使用github托管hexo博客"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+      <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2016-2025
+        suhaynn
+      </div>
+      <div class="footer-right">
+        <nav>
+          <ul>
+            <!--
+          --><li><a href="../../../../index.html">首页</a></li><!--
+        --><!--
+          --><li><a href="../../../../about/">关于</a></li><!--
+        --><!--
+          --><li><a href="../../../../archives/">归档</a></li><!--
+        -->
+          </ul>
+          <ul>
+            
+              <!-- 不蒜子统计 -->
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+          </ul>
+        </nav>
+      </div>
+      
+</footer>
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="../../../../js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
